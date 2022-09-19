@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Recipies;
 using System;
 using System.Globalization;
+using System.Text.Json;
 
 namespace LibraryTests
 {
@@ -30,7 +31,7 @@ namespace LibraryTests
             recipe.FinalProduct = product;
             recipe.AddStep(step);
 
-            string actual = recipe.ConvertToJson();
+            string actual = JsonSerializer.Serialize<Recipe>(recipe);
 
             Assert.AreEqual(recipeJson, actual);
         }
@@ -38,6 +39,10 @@ namespace LibraryTests
         [Test]
         public void DeserializeStepTest()
         {
+            //Product product = new Product(productDescription, unitCost);
+            //Equipment equipment = new Equipment(equipmentDescription, hourlyCost);
+            //Step step = new Step(product, quantity, equipment, time);
+            string json= $@"{{""FinalProduct"":{productJson},""Steps"":[{stepJson}]}}";
             Step step = new Step(stepJson);
 
             Assert.AreEqual(step.Input.Description, productDescription);

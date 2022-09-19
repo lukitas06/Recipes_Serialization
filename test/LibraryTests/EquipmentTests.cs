@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using Recipies;
 using System.Globalization;
+using System.Text.Json;
+
 
 namespace LibraryTests
 {
@@ -25,7 +27,12 @@ namespace LibraryTests
         [Test]
         public void DeserializeEquipmentTest()
         {
-            Equipment equipment = new Equipment(json);
+            Equipment equipment= new Equipment(json);
+            //equipment.LoadFromJson(json);
+
+            //equipment.LoadFromJson();
+            //Equipment equipment = JsonSerializer.Deserialize<Equipment>(json) ;
+
 
             Assert.AreEqual(description, equipment.Description);
             Assert.AreEqual(hourlyCost, equipment.HourlyCost);

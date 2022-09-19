@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using Recipies;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace LibraryTests
 {
@@ -36,8 +38,12 @@ namespace LibraryTests
         public void DeserializeStepTest()
         {
             string json = $@"{{""Input"":{productJson},""Quantity"":{quantity},""Time"":{time},""Equipment"":{equipmentJson}}}";
-
-            Step step = new Step(json);
+            //Step step=new Step(json);
+            
+           // Step stepDeser = new step.LoadFromJson(json);
+           Step step= JsonSerializer.Deserialize<Step>(json);
+            
+            
 
             Assert.AreEqual(step.Input.Description, productDescription);
             Assert.AreEqual(step.Quantity, quantity);

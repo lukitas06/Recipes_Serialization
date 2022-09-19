@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Recipies;
 using System.Globalization;
+using System.Text.Json;
 
 namespace LibraryTests
 {
@@ -27,10 +28,12 @@ namespace LibraryTests
         [SetCulture("en-US")]
         public void DeserializeProductTest()
         {
-            Product Product = new Product(json);
+            Product product = new Product(json);
+            //Product Productdeser= JsonSerializer.Deserialize<Product>(json);
 
-            Assert.AreEqual(description, Product.Description);
-            Assert.AreEqual(unitCost, Product.UnitCost);
+
+            Assert.AreEqual(description, product.Description);
+            Assert.AreEqual(unitCost, product.UnitCost);
         }
     }
 }
